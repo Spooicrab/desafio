@@ -7,8 +7,9 @@ router.get('/allproducts', async (req, res) => {
     res.render('allproducts', { products })
 })
 
-router.get('/RealtimeProducts', (req, res) => {
-    res.render('realtimeproducts')
+router.get('/RealtimeProducts', async (req, res) => {
+    const products = await ProductManager.getProducts({})
+    res.render('realtimeproducts', { products })
 })
 
 export default router 

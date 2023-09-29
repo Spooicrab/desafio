@@ -1,0 +1,28 @@
+<style>
+  #productos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  #productos > div { background-color: #f2f2f2; padding: 20px; border-radius:
+  5px; text-align: center; }
+</style>
+<h2>añadir producto</h2>
+<form id="NuevoProd">
+  <input type="text" name="title" id="title" />
+  <input type="text" name="description" id="description" />
+  <input type="text" name="price" id="price" />
+  <input type="text" name="thumbnail" id="thumbnail" />
+  <input type="text" name="code" id="code" />
+  <input type="text" name="stock" id="stock" />
+
+</form>
+
+<div id="productos">
+  {{#each products}}
+    <div>
+      <h3>{{title}}</h3>
+      <h2>{{id}}</h2>
+      <p>${{price}}</p>
+      <p>stock:{{stock}}</p>
+    </div>
+  {{/each}}
+</div>
+<script src="/socket.io/socket.io.js"> </script>
+<script src="../public/js/index.js"></script>
