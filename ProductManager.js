@@ -6,7 +6,7 @@ class GestorProductos {
     }
 
     async getProducts(Query) {
-        const { limit } = Query;
+        const { limit } = Query ? Query : 10
         try {
             const productsFile = await fs.promises.readFile(this.path, "utf-8");
             const productsArray = JSON.parse(productsFile);
@@ -16,26 +16,6 @@ class GestorProductos {
             return error;
         }
     }
-
-    async addProducts(Obj) {
-        try {
-            const users = await this.getUsers({})
-
-            let id
-
-            users.length ? id = 1 : id = users[users.length - 1].id + 1
-
-            const newUser = { id, ...Obj }
-
-            users.push(newUser)
-
-            await fs.promises.writeFile(this.path, JSON.stringify(users))
-            return newUser
-        } catch (error) {
-            return error
-        }
-    }
-
 
     async getProductbyID(ID) {
         try {
@@ -78,7 +58,7 @@ class GestorProductos {
 
     async AddProduct(obj) {
         try {
-            const Productos = await this.getProducts({})
+            const Productos = await this.getProducts()
             let id
             id = Productos.length ? Productos[Productos.length - 1].id + 1 : 1
             const ProductoNuevo = { id, ...obj }

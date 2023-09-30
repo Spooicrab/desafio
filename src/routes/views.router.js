@@ -3,12 +3,12 @@ import { ProductManager } from "../../ProductManager.js";
 const router = Router()
 
 router.get('/allproducts', async (req, res) => {
-    const products = await ProductManager.getProducts({})
+    const products = await ProductManager.getProducts()
     res.render('allproducts', { products })
 })
 
-router.get('/RealtimeProducts', async (req, res) => {
-    const products = await ProductManager.getProducts({})
+router.get('/realtimeproducts', async (req, res) => {
+    const products = await ProductManager.getProducts()
     res.render('realtimeproducts', { products })
 })
 
