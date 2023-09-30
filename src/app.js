@@ -26,8 +26,11 @@ const Sserver = new Server(hhtpserver)
 Sserver.on("connection", (socket) => {
     console.log(`Cliente conectado: ${socket.id}`);
 
-    socket.on("Addproduct", async (obj) => {
-        const newObj = await ProductManager.addProduct(obj);
+    socket.on("AddProduct", async (obj) => {
+        console.log("1")
+        const newObj = await ProductManager.AddProduct(obj);
         socket.emit("productAdded", newObj);
+        console.log("2")
+
     });
 });

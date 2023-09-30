@@ -32,4 +32,4 @@ socketclient.on("productAdded", (newObj) => {
     </div>
     `;
     verProductos.innerHTML += vista;
-}); 
+});
