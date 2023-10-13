@@ -1,16 +1,10 @@
-import mongoose from "mongoose";
 import { ProductoModel } from "../models/models.js";
 
 class ProductsManager {
 
     async findAll() {
-        try {
-            const response = await ProductoModel.find().lean()
-            return response;
-        } catch (error) {
-            return error
-        }
-
+        const response = await ProductoModel.find()
+        return response;
     }
 
     async findOne(id) {
@@ -25,7 +19,6 @@ class ProductsManager {
 
     async Delete(id) {
         const response = await ProductoModel.findByIdAndDelete(id)
-
     }
 
 }

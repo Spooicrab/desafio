@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const URI = "mongodb+srv://Coder:House@midatabasecoder.ehu4trq.mongodb.net/EcommerceCoder?retryWrites=true&w=majority"

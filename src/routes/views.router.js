@@ -16,13 +16,12 @@
 
 // import { ProductManager } from "../ProductManager.js";
 import { Router } from "express";
-import "../dao/config.js"
 import { ProductManager } from "../dao/mongo/ProductManager.js";
 const router = Router()
 
 router.get("/", async (req, res) => {
     const Productos = await ProductManager.findAll()
-    res.json(Productos)
+    res.render('allproducts', ({ Productos }))
 })
 
 router.get("/:id", async (req, res) => {
@@ -35,8 +34,6 @@ router.post("/", async (req, res) => {
     const AddProduct = await ProductManager.Add(req.body)
     res.json(AddProduct)
 })
-
-//65287afd5f7228bb88d14907
 
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
