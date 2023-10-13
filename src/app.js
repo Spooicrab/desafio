@@ -1,9 +1,11 @@
 import express from "express";
-import handlebars from "express-handlebars";
 import { __dirname } from "./utils.js";
 import ViewsRouter from './routes/views.router.js'
+import handlebars from "express-handlebars";
 import "./dao/config.js"
+import ChatRouter from "./routes/Chat.router.js";
 import { Server } from "socket.io";
+import { Chat } from "./dao/mongo/Chatmanager.js";
 
 const app = express()
 
@@ -16,22 +18,20 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 
 app.use('/', ViewsRouter)
+app.use('/chat', ChatRouter)
 
 const Port8080 = app.listen(8080, () => {
     console.log("ando")
 })
-// const hhtpserver = app.listen(8080, () => {
-//     console.log("escuchando puerto 8080");
-// })
 
 const Sserver = new Server(Port8080)
 
 Sserver.on("connection", (socket) => {
     console.log(`Cliente conectado: ${socket.id}`);
+    socket.on("Mensaje", async (obj) => {
+        const Mensajes = await Chat.Add(obj)
+        const Chats = await Chat.GetAll({})
+        socket.emit("OK", Chats)
 
-    socket.on("AddProduct", async (obj) => {
-        const newObj = await ProductManager.Add(obj);
-        socket.emit("productAdded", newObj);
-
-    });
+    })
 });
