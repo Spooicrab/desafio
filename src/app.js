@@ -17,21 +17,14 @@ app.set('view engine', 'handlebars')
 
 app.use('/', ViewsRouter)
 
-
-// Añado esto porque no tengo idea del por que me salta un error con un favicon
-
-app.get('/favicon.ico', (req, res) => {
-    res.status(204);
-});
-
-//
-
-
-const hhtpserver = app.listen(8080, () => {
-    console.log("escuchando puerto 8080");
+const Port8080 = app.listen(8080, () => {
+    console.log("ando")
 })
+// const hhtpserver = app.listen(8080, () => {
+//     console.log("escuchando puerto 8080");
+// })
 
-const Sserver = new Server(hhtpserver)
+const Sserver = new Server(Port8080)
 
 Sserver.on("connection", (socket) => {
     console.log(`Cliente conectado: ${socket.id}`);

@@ -20,9 +20,17 @@ import { ProductManager } from "../dao/mongo/ProductManager.js";
 const router = Router()
 
 router.get("/", async (req, res) => {
-    const Productos = await ProductManager.findAll()
+    const Productos = await ProductManager.findAll({})
     res.render('allproducts', ({ Productos }))
 })
+
+// // Añado esto porque no tengo idea del por que me salta un error con un favicon
+
+// router.get('/favicon.ico', (req, res) => {
+//     res.status(204);
+// });
+
+// //
 
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
